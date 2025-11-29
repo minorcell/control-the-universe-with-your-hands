@@ -1,7 +1,0 @@
-{
-  "name": "事件视界扫描仪",
-  "description": "一个视觉实验，模拟黑洞，通过摄像头分析物体，然后利用 Gemini AI '吞噬' 它们。",
-  "requestFramePermissions": [
-    "camera"
-  ]
-}
