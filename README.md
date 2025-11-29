@@ -1,29 +1,15 @@
-﻿# 控制宇宙于掌间
+﻿# 掌控黑洞于掌间
 
 基于浏览器摄像头、MediaPipe 手部追踪和 Three.js 黑洞场景的交互实验，用手势在 3D 空间环绕「事件视界」。
 
-## 功能亮点
-
-- 浏览器端运行，使用 GPU 加速的 MediaPipe hand_landmarker，无需额外安装。
-- 手势平滑驱动 Three.js 摄像机，未检测到手时自动巡航。
-- HUD 式「启动连接」界面与手骨架预览，方便校准。
-
-## 快速开始
-
-1. 安装依赖：`npm install`
-2. 开发调试：`npm run dev`，按提示在浏览器打开本地地址。
-3. 构建产物：`npm run build`；本地预览：`npm run preview`。
-4. 运行时允许浏览器访问摄像头，保持光线充足、手心朝向镜头以获得最佳识别效果。
+<video src="public/demo.mp4" controls width="100%" style="max-width: 800px;">
+  您的浏览器不支持视频播放，请直接查看 <a href="public/demo.mp4">demo.mp4</a>
+</video>
 
 ## 使用说明
 
 - 进入页面后点击「启动连接」授权摄像头。
 - 将手举到画面中央，手腕与指尖会在 HUD 中显示骨架，便于确认识别状态。
-- 移动手即可让视角环绕黑洞；手离开镜头约 1.5 秒后会自动恢复巡航动画。
-
-## 技术栈
-
-React + Vite + Tailwind CSS + Three.js + @mediapipe/tasks-vision（hand_landmarker）。
 
 ## 常见问题
 
