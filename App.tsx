@@ -6,11 +6,14 @@ import { initializeHandLandmarker, detectHand } from './services/gestureService'
 
 const App: React.FC = () => {
   const [appState, setAppState] = useState<AppState>(AppState.IDLE);
-  const [handPosition, setHandPosition] = useState<HandPosition>({ x: 0, y: 0, detected: false });
+  const [handPosition, setHandPosition] = useState<HandPosition>({ x: 0, y: 0, detected: false, proximity: 0 });
   
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const animationFrameRef = useRef<number>(0);
+  const lastHandRef = useRef<HandPosition>({ x: 0, y: 0, detected: false, proximity: 0, landmarks: [] });
+  const lastSeenRef = useRef<number>(0);
+  const DETECTION_HOLD_MS = 300;
 
   // 初始化摄像头和手势识别
   const startCamera = async () => {
@@ -47,15 +50,24 @@ const App: React.FC = () => {
       if (videoRef.current && videoRef.current.readyState >= 2) {
         // 检测手部
         const hand = detectHand(videoRef.current);
+        const now = Date.now();
+
+        let nextHand = hand;
+
+        if (hand.detected) {
+          lastSeenRef.current = now;
+          lastHandRef.current = hand;
+        } else if (now - lastSeenRef.current < DETECTION_HOLD_MS && lastHandRef.current.detected) {
+          // 在短时间失帧时保持上一帧，避免UI闪烁
+          nextHand = lastHandRef.current;
+        }
 
         // 更新状态
         setHandPosition(prev => {
-           // 如果需要可以对UI状态进行基本平滑处理，但通常直接传递给BlackHole即可
            // 仅在检测状态改变或需要驱动React UI时更新
-           // 为了3D性能，BlackHole可以使用Ref，但由于App中有光标，我们需要状态管理。
-           if (prev.detected !== hand.detected) return hand;
+           if (prev.detected !== nextHand.detected) return nextHand;
            // 如果检测到手部，总是更新坐标
-           if (hand.detected) return hand;
+           if (nextHand.detected) return nextHand;
            return prev;
         });
       }

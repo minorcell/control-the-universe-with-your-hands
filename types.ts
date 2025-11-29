@@ -14,6 +14,10 @@ export interface HandPosition {
   x: number; // Normalized -1 to 1 for control
   y: number; // Normalized -1 to 1 for control
   detected: boolean;
+  /**
+   * Closeness proxy (0-1). 0 = far, 1 = very close. Derived from landmark span.
+   */
+  proximity?: number;
   landmarks?: Landmark[]; // Raw landmarks for visualization
 }
 

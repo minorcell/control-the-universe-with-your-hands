@@ -24,9 +24,9 @@ const HandVisualizer: React.FC<{ hand: HandPosition }> = ({ hand }) => {
   ];
 
   return (
-    <div className="w-32 h-24 border border-blue-500/20 bg-black/40 rounded-lg backdrop-blur-md flex items-center justify-center relative shadow-[0_0_15px_rgba(0,100,255,0.2)]">
+    <div className="w-32 h-24 border border-blue-400/40 bg-black/80 rounded-lg backdrop-blur-md flex items-center justify-center relative shadow-[0_0_20px_rgba(0,100,255,0.25)]">
       {/* 网格线 */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,100,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(0,100,255,0.1)_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,120,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(0,120,255,0.2)_1px,transparent_1px)] bg-[size:10px_10px]"></div>
       
       <svg className="w-full h-full p-2 transform scale-x-[-1]" viewBox="0 0 1 1">
         {connections.map(([start, end], i) => (
@@ -39,7 +39,7 @@ const HandVisualizer: React.FC<{ hand: HandPosition }> = ({ hand }) => {
             stroke="#00ffff"
             strokeWidth="0.02"
             strokeLinecap="round"
-            className="opacity-60"
+            className="opacity-80"
           />
         ))}
         {points.map((p, i) => (
@@ -49,11 +49,11 @@ const HandVisualizer: React.FC<{ hand: HandPosition }> = ({ hand }) => {
             cy={p.y}
             r="0.015"
             fill={i === 0 ? "#ffaa00" : "#ffffff"} // 手腕是橙色的
-            className="drop-shadow-[0_0_2px_rgba(255,255,255,0.8)]"
+            className="drop-shadow-[0_0_3px_rgba(255,255,255,0.9)]"
           />
         ))}
       </svg>
-      <div className="absolute top-1 left-2 text-[8px] text-blue-400 font-mono tracking-widest">
+      <div className="absolute top-1 left-2 text-[8px] text-blue-300 font-mono tracking-widest drop-shadow-[0_0_4px_rgba(0,120,255,0.6)]">
         INPUT_MONITOR
       </div>
     </div>
@@ -71,9 +71,8 @@ const ScannerOverlay: React.FC<ScannerOverlayProps> = ({
       {/* 页头 */}
       <header className="absolute top-6 w-full text-center">
         <h1 className="text-3xl md:text-5xl font-thin tracking-[0.5em] text-white opacity-80 uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
-          事件视界
+          使用你的手控制黑洞
         </h1>
-        <p className="text-xs text-blue-300 mt-2 tracking-widest opacity-60">手势交互模拟系统</p>
       </header>
 
       {/* 主要内容区域 */}
