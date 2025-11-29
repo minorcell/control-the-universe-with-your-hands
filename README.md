@@ -2,9 +2,9 @@
 
 基于浏览器摄像头、MediaPipe 手部追踪和 Three.js 黑洞场景的交互实验，用手势在 3D 空间环绕「事件视界」。
 
-<video src="public/demo.mp4" controls width="100%" style="max-width: 800px;">
-  您的浏览器不支持视频播放，请直接查看 <a href="public/demo.mp4">demo.mp4</a>
-</video>
+
+https://github.com/user-attachments/assets/05fafff8-7e26-4f82-a514-185bddf3d859
+
 
 ## 使用说明
 
