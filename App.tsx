@@ -45,18 +45,18 @@ const App: React.FC = () => {
   const startGestureLoop = () => {
     const loop = () => {
       if (videoRef.current && videoRef.current.readyState >= 2) {
-        // Detect hand
+        // 检测手部
         const hand = detectHand(videoRef.current);
-        
-        // Update state
+
+        // 更新状态
         setHandPosition(prev => {
-           // Basic smoothing for UI state if needed, but passing raw to BlackHole is usually fine
-           // Only update if detection status changes or we want to drive React UI
-           // For 3D performance, BlackHole could use a Ref, but since we have a cursor in App, we need state.
+           // 如果需要可以对UI状态进行基本平滑处理，但通常直接传递给BlackHole即可
+           // 仅在检测状态改变或需要驱动React UI时更新
+           // 为了3D性能，BlackHole可以使用Ref，但由于App中有光标，我们需要状态管理。
            if (prev.detected !== hand.detected) return hand;
-           // If detected, always update coordinates
+           // 如果检测到手部，总是更新坐标
            if (hand.detected) return hand;
-           return prev; 
+           return prev;
         });
       }
       animationFrameRef.current = requestAnimationFrame(loop);
@@ -77,7 +77,7 @@ const App: React.FC = () => {
 
   return (
     <div className="relative w-full h-screen bg-black overflow-hidden font-sans selection:bg-blue-500 selection:text-white">
-      {/* Hidden Video Element for Processing */}
+      {/* 隐藏的视频元素用于处理 */}
       <video
         ref={videoRef}
         className="absolute top-0 left-0 w-px h-px opacity-0 pointer-events-none"
@@ -85,12 +85,12 @@ const App: React.FC = () => {
         muted
       />
 
-      {/* Background Layer - 3D Black Hole */}
+      {/* 背景层 - 3D黑洞 */}
       <BlackHole
         handPosition={handPosition}
       />
 
-      {/* Foreground Layer - UI */}
+      {/* 前景层 - UI */}
       <ScannerOverlay 
         appState={appState}
         onStartCamera={startCamera}

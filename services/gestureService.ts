@@ -32,7 +32,7 @@ export const detectHand = (video: HTMLVideoElement): HandPosition => {
 
   if (results.landmarks && results.landmarks.length > 0) {
     const landmarks = results.landmarks[0];
-    const point = landmarks[9]; // Middle finger MCP
+    const point = landmarks[9]; // 中指掌指关节
     
     return {
       x: (1 - point.x) * 2 - 1, 
