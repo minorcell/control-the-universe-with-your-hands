@@ -5,7 +5,6 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig(() => {
   return {
-    base: '/control-the-universe-with-your-hands/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
