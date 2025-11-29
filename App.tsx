@@ -12,7 +12,7 @@ const App: React.FC = () => {
   const streamRef = useRef<MediaStream | null>(null);
   const animationFrameRef = useRef<number>(0);
 
-  // Initialize Camera & Gesture Recognition
+  // 初始化摄像头和手势识别
   const startCamera = async () => {
     try {
       await initializeHandLandmarker();
@@ -29,7 +29,7 @@ const App: React.FC = () => {
       streamRef.current = stream;
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
-        // Wait for video metadata to be ready before starting loop
+        // 等待视频元数据准备好后再启动循环
         videoRef.current.onloadedmetadata = () => {
            videoRef.current?.play().catch(e => console.error("Play failed", e));
            setAppState(AppState.ACTIVE);
@@ -86,26 +86,10 @@ const App: React.FC = () => {
       />
 
       {/* Background Layer - 3D Black Hole */}
-      <BlackHole 
+      <BlackHole
         handPosition={handPosition}
       />
-      
-      {/* Hand Cursor/Feedback - Visual indicator following hand */}
-      {handPosition.detected && appState === AppState.ACTIVE && (
-        <div 
-          className="fixed w-20 h-20 border border-blue-400/50 rounded-full pointer-events-none z-20 transition-transform duration-[50ms] ease-out flex items-center justify-center backdrop-blur-[2px] shadow-[0_0_30px_rgba(59,130,246,0.3)]"
-          style={{ 
-            left: `${(handPosition.x + 1) / 2 * 100}%`, 
-            top: `${(-handPosition.y + 1) / 2 * 100}%`,
-            transform: 'translate(-50%, -50%)'
-          }}
-        >
-          <div className="w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_15px_white]"></div>
-          <div className="absolute inset-0 border-t-2 border-l-2 border-transparent border-t-blue-300 border-l-blue-300 rounded-full animate-[spin_3s_linear_infinite]"></div>
-          <div className="absolute -inset-2 border-b border-r border-transparent border-b-purple-500/50 border-r-purple-500/50 rounded-full animate-[spin_5s_linear_reverse_infinite]"></div>
-        </div>
-      )}
-      
+
       {/* Foreground Layer - UI */}
       <ScannerOverlay 
         appState={appState}
